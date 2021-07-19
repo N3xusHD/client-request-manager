@@ -4,7 +4,9 @@
   "description": "A qBittorrent node API forked from @jesec/flood",
   "main": "./dist/client-request-manager.js",
   "types": "./dist/client-request-manager.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
