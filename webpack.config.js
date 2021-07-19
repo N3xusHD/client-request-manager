@@ -1,11 +1,11 @@
 var path = require("path");
 
 module.exports = {
-  entry: "./src/ClientRequestManager.ts",
+  entry: "./client-request-manager.ts",
   mode: "production",
   target: "node",
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "./dist"),
     filename: "client-request-manager.js",
     library: "ClientRequestManager",
     libraryTarget: "umd",
