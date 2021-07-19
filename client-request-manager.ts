@@ -3,7 +3,7 @@ import FormData from 'form-data';
 import {literal, string, strictObject} from 'zod';
 import type {infer as zodInfer} from 'zod';
 
-const qBittorrentConnectionSettingsSchema = strictObject({
+export const qBittorrentConnectionSettingsSchema = strictObject({
   client: literal('qBittorrent'),
   type: literal('web'),
   version: literal(1),
@@ -12,9 +12,9 @@ const qBittorrentConnectionSettingsSchema = strictObject({
   password: string(),
 });
 
-type QBittorrentConnectionSettings = zodInfer<typeof qBittorrentConnectionSettingsSchema>;
+export type QBittorrentConnectionSettings = zodInfer<typeof qBittorrentConnectionSettingsSchema>;
 
-interface QBittorrentAppPreferences {
+export interface QBittorrentAppPreferences {
   dht: boolean;
   pex: boolean;
   // Default save path for torrents, separated by slashes
@@ -40,12 +40,12 @@ interface QBittorrentAppPreferences {
 }
 
 
-interface QBittorrentCategory {
+export interface QBittorrentCategory {
   name: string;
   savePath: string;
 }
 
-interface QBittorrentTorrentPeer {
+export interface QBittorrentTorrentPeer {
   client: string;
   connection: string;
   country: string;
@@ -63,7 +63,7 @@ interface QBittorrentTorrentPeer {
   relevance: number;
 }
 
-interface QBittorrentSyncMainData {
+export interface QBittorrentSyncMainData {
   rid: number;
   full_update?: boolean;
   categories?: {
@@ -83,11 +83,11 @@ interface QBittorrentSyncMainData {
   trackers_removed: string[];
 }
 
-type QBittorrentMainData = Required<
+export type QBittorrentMainData = Required<
   Pick<QBittorrentSyncMainData, 'categories' | 'server_state' | 'tags' | 'torrents' | 'trackers'>
 >;
 
-interface QBittorrentSyncTorrentPeers {
+export interface QBittorrentSyncTorrentPeers {
   rid: number;
   peers?: {
     [ip_and_port: string]: QBittorrentTorrentPeer;
@@ -95,10 +95,10 @@ interface QBittorrentSyncTorrentPeers {
   peers_removed?: string[];
 }
 
-type QBittorrentTorrentPeers = Exclude<QBittorrentSyncTorrentPeers['peers'], undefined>;
+export type QBittorrentTorrentPeers = Exclude<QBittorrentSyncTorrentPeers['peers'], undefined>;
 
 
-interface QBittorrentTransferInfo {
+export interface QBittorrentTransferInfo {
   // Global download rate (bytes/s)
   dl_info_speed: number;
   // Data downloaded this session (bytes)
@@ -116,7 +116,8 @@ interface QBittorrentTransferInfo {
   // Connection status
   connection_status: 'connected' | 'firewalled' | 'disconnected';
 }
-type QBittorrentTorrentState =
+
+export type QBittorrentTorrentState =
   | 'error'
   | 'missingFiles'
   | 'uploading'
@@ -137,7 +138,7 @@ type QBittorrentTorrentState =
   | 'moving'
   | 'unknown';
 
-interface QBittorrentTorrentInfo {
+export interface QBittorrentTorrentInfo {
   // Time (Unix Epoch) when the torrent was added to the client
   added_on: number;
   // Amount of data left to download (bytes)
@@ -226,9 +227,9 @@ interface QBittorrentTorrentInfo {
   upspeed: number;
 }
 
-type QBittorrentTorrentInfos = Array<QBittorrentTorrentInfo>;
+export type QBittorrentTorrentInfos = Array<QBittorrentTorrentInfo>;
 
-interface QBittorrentTorrentsAddOptions {
+export interface QBittorrentTorrentsAddOptions {
   // Download folder
   savepath?: string;
   // Cookie sent to download the .torrent file
@@ -259,14 +260,14 @@ interface QBittorrentTorrentsAddOptions {
   firstLastPiecePrio?: boolean;
 }
 
-enum QBittorrentTorrentContentPriority {
+export enum QBittorrentTorrentContentPriority {
   DO_NOT_DOWNLOAD = 0,
   NORMAL = 1,
   HIGH = 6,
   MAXIMUM = 7,
 }
 
-interface QBittorrentTorrentContent {
+export interface QBittorrentTorrentContent {
   // File name (including relative path)
   name: string;
   // File size (bytes)
@@ -283,9 +284,9 @@ interface QBittorrentTorrentContent {
   availability: number;
 }
 
-type QBittorrentTorrentContents = Array<QBittorrentTorrentContent>;
+export type QBittorrentTorrentContents = Array<QBittorrentTorrentContent>;
 
-interface QBittorrentTorrentProperties {
+export interface QBittorrentTorrentProperties {
   // Torrent save path
   save_path: string;
   // Torrent creation date (Unix timestamp)
@@ -354,7 +355,7 @@ interface QBittorrentTorrentProperties {
   up_speed: number;
 }
 
-enum QBittorrentTorrentTrackerStatus {
+export enum QBittorrentTorrentTrackerStatus {
   // Tracker is disabled (used for DHT, PeX, and LSD)
   DISABLED = 0,
   // Tracker has not been contacted yet
@@ -367,7 +368,7 @@ enum QBittorrentTorrentTrackerStatus {
   ERROR = 4,
 }
 
-interface QBittorrentTorrentTracker {
+export interface QBittorrentTorrentTracker {
   // Tracker url
   url: string;
   // Tracker status
@@ -386,10 +387,10 @@ interface QBittorrentTorrentTracker {
   msg: string;
 }
 
-type QBittorrentTorrentTrackers = Array<QBittorrentTorrentTracker>;
+export type QBittorrentTorrentTrackers = Array<QBittorrentTorrentTracker>;
 
 
-const EMPTY_SERVER_STATE = {
+export const EMPTY_SERVER_STATE = {
   dl_info_speed: 0,
   dl_info_data: 0,
   up_info_speed: 0,
